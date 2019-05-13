@@ -1,9 +1,12 @@
 package com.zxj.zlz;
 
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,18 +23,39 @@ public class MainActivity extends AppCompatActivity implements
         FragmentBlogs.OnListFragmentInteractionListener,
         FragmentMine.OnFragmentInteractionListener{
 
+    private FragmentManager mFragmentManager;
     private FragmentHome mFragmentHome;
     private FragmentBlogs mFragmentBlogs;
     private FragmentMine mFragmentMine;
-    private Fragment[] mFragments;
     private int lastShowFragment = 0;
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        outState.putInt("lastShowFragment", lastShowFragment);
+
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initFragments();
+        mFragmentManager = getSupportFragmentManager();
+        if(null != savedInstanceState) {
+            try {
+                mFragmentHome = (FragmentHome)mFragmentManager.findFragmentByTag(FragmentHome.class.getSimpleName());
+                mFragmentBlogs = (FragmentBlogs)mFragmentManager.findFragmentByTag(FragmentBlogs.class.getSimpleName());
+                mFragmentMine = (FragmentMine)mFragmentManager.findFragmentByTag(FragmentMine.class.getSimpleName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            lastShowFragment = savedInstanceState.getInt("lastShowFragment");
+        }
+
+        switchFrament(lastShowFragment);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -40,13 +64,13 @@ public class MainActivity extends AppCompatActivity implements
 
                 switch (menuItem.getItemId()) {
                     case R.id.navigation_home:
-                        switchFrament(lastShowFragment, 0);
+                        switchFrament(0);
                         return true;
                     case R.id.navigation_dashboard:
-                        switchFrament(lastShowFragment, 1);
+                        switchFrament(1);
                         return true;
                     case R.id.navigation_notifications:
-                        switchFrament(lastShowFragment, 2);
+                        switchFrament(2);
                         return true;
                 }
 
@@ -83,27 +107,35 @@ public class MainActivity extends AppCompatActivity implements
         }).start();
     }
 
-    private void initFragments() {
-        mFragmentHome = new FragmentHome();
-        mFragmentBlogs = new FragmentBlogs();
-        mFragmentMine = new FragmentMine();
-        mFragments = new Fragment[]{mFragmentHome, mFragmentBlogs, mFragmentMine};
-
-        lastShowFragment = 0;
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.FramePage, mFragmentHome)
-                .show(mFragmentHome)
-                .commit();
-    }
-
-    private void switchFrament(int lastIndex, int index) {
+    private void switchFrament(int index) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.hide(mFragments[lastIndex]);
-        if (!mFragments[index].isAdded()) {
-            transaction.add(R.id.FramePage, mFragments[index]);
+        hideFragments(transaction);
+
+        switch (index) {
+            case 0:
+                if (mFragmentHome == null) {
+                    mFragmentHome = new FragmentHome();
+                    transaction.add(R.id.FramePage, mFragmentHome, FragmentHome.class.getSimpleName());
+                }
+                transaction.show(mFragmentHome);
+                break;
+            case 1:
+                if (mFragmentBlogs == null) {
+                    mFragmentBlogs = new FragmentBlogs();
+                    transaction.add(R.id.FramePage, mFragmentBlogs, FragmentBlogs.class.getSimpleName());
+                }
+                transaction.show(mFragmentBlogs);
+                break;
+            case 2:
+                if (mFragmentMine == null) {
+                    mFragmentMine = new FragmentMine();
+                    transaction.add(R.id.FramePage, mFragmentMine, FragmentMine.class.getSimpleName());
+                }
+                transaction.show(mFragmentMine);
+                break;
         }
-        transaction.show(mFragments[index]).commitAllowingStateLoss();
+        transaction.commit();
+
         lastShowFragment = index;
     }
 
@@ -115,5 +147,14 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onListFragmentInteraction(String item) {
 
+    }
+
+    private void hideFragments(FragmentTransaction pTransaction) {
+        if (mFragmentHome != null && mFragmentHome.isVisible())
+            pTransaction.hide(mFragmentHome);
+        if (mFragmentBlogs != null && mFragmentBlogs.isVisible())
+            pTransaction.hide(mFragmentBlogs);
+        if (mFragmentMine != null && mFragmentMine.isVisible())
+            pTransaction.hide(mFragmentMine);
     }
 }

@@ -43,7 +43,7 @@ public class FragmentBlogs extends Fragment implements SwipeRefreshLayout.OnRefr
     private OnListFragmentInteractionListener mListener;
 
     private int lastVisibleItem = 0;
-    private List<String> list;
+    private List<Blog> list;
     private final int PAGE_COUNT = 10;
     private GridLayoutManager mLayoutManager;
 
@@ -60,13 +60,11 @@ public class FragmentBlogs extends Fragment implements SwipeRefreshLayout.OnRefr
             super.handleMessage(msg);
             switch (msg.what) {
                 case SUCCESS:
-                    Toast.makeText(getActivity(), "SUCCESS", Toast.LENGTH_SHORT).show();
                     if(list.size() > 0) {
-                        updateRecyclerView(0, 1);
+                        updateRecyclerView(mBlogsAdapter.getRealLastPosition(), mBlogsAdapter.getRealLastPosition() + PAGE_COUNT);
                     }
                     break;
                 case FAIL:
-                    Toast.makeText(getActivity(),"FAIL", Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     super.handleMessage(msg);
@@ -123,14 +121,11 @@ public class FragmentBlogs extends Fragment implements SwipeRefreshLayout.OnRefr
         refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
         refreshLayout.setOnRefreshListener(this);
 
-
-    // Set the adapter
-
         Context context = view.getContext();
         mLayoutManager = new GridLayoutManager(context, 1);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        List<String> newDatas = getDatas(0, PAGE_COUNT);
+        List<Blog> newDatas = getDatas(0, PAGE_COUNT);
         mBlogsAdapter = new MyBlogsRecyclerViewAdapter(view.getContext(), newDatas,  mListener);
         recyclerView.setAdapter(mBlogsAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -193,20 +188,26 @@ public class FragmentBlogs extends Fragment implements SwipeRefreshLayout.OnRefr
         void onListFragmentInteraction(String item);
     }
 
-    private List<String> getDatas(final int firstIndex, final int lastIndex) {
-        List<String> resList = new ArrayList<>();
-        for (int i = firstIndex; i < lastIndex; i++) {
-            if (i < list.size()) {
-                resList.add(list.get(i));
-            }
+    private List<Blog> getDatas(final int firstIndex, final int lastIndex) {
+        List<Blog> resList = new ArrayList<>();
+        int count = list.size() < lastIndex? list.size() : lastIndex;
+
+        Blog blog;
+        for (int i = firstIndex; i < count; i++) {
+            resList.add(list.get(i));
         }
         return resList;
     }
 
     private void updateRecyclerView(int fromIndex, int toIndex) {
-        List<String> newDatas = getDatas(fromIndex, toIndex);
+        List<Blog> newDatas = getDatas(fromIndex, toIndex);
+        int realSize = toIndex - fromIndex;
         if (newDatas.size() > 0) {
-            mBlogsAdapter.updateList(newDatas, true);
+            if(realSize == newDatas.size()) {
+                mBlogsAdapter.updateList(newDatas, true);
+            } else {
+                mBlogsAdapter.updateList(newDatas, false);
+            }
         } else {
             mBlogsAdapter.updateList(null, false);
         }
@@ -254,10 +255,14 @@ public class FragmentBlogs extends Fragment implements SwipeRefreshLayout.OnRefr
                         for(int i = 0; i < blogs.length(); i++) {
                             JSONObject blog = blogs.getJSONObject(i);
                             String name = blog.getString("name");
-                            list.add(name);
+                            String content = blog.getString("content");
+                            String user_name = blog.getString("user_name");
+                            Long created_at = blog.getLong("created_at");
+
+                            list.add(new Blog(name, user_name, created_at, content));
                         }
 
-                        list.add("哈哈");
+                        //list.add(new Blog("示例新闻", "zxj", 1557370765L, "2019-05-13"));
 
                         Message msg=new Message();
                         msg.what=1;

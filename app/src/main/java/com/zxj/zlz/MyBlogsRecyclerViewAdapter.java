@@ -21,18 +21,20 @@ import java.util.List;
  */
 public class MyBlogsRecyclerViewAdapter extends RecyclerView.Adapter<MyBlogsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<String> mValues;
+    private final List<Blog> mValues;
     private final OnListFragmentInteractionListener mListener;
 
     private Context context;
     private int normalType = 0;
     private int footType = 1;
+
     private boolean hasMore = true;
+    private boolean hasInit = false;
 
     private boolean fadeTips = false;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    public MyBlogsRecyclerViewAdapter(Context context, List<String> items, OnListFragmentInteractionListener listener) {
+    public MyBlogsRecyclerViewAdapter(Context context, List<Blog> items, OnListFragmentInteractionListener listener) {
         this.context = context;
         this.mValues = items;
         this.mListener = listener;
@@ -49,8 +51,16 @@ public class MyBlogsRecyclerViewAdapter extends RecyclerView.Adapter<MyBlogsRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+
+        if(position == mValues.size() - 1 && !hasInit) {
+            hasInit = true;
+            return;
+        }
         if (holder instanceof NormalHolder) {
-            ((NormalHolder) holder).textView.setText(mValues.get(position));
+            Blog blog = mValues.get(position);
+            ((NormalHolder) holder).title.setText(blog.title);
+            ((NormalHolder) holder).user.setText(blog.user);
+            ((NormalHolder) holder).time.setText(blog.time);
         } else {
             ((FootHolder) holder).tips.setVisibility(View.VISIBLE);
             if (hasMore == true) {
@@ -100,20 +110,27 @@ public class MyBlogsRecyclerViewAdapter extends RecyclerView.Adapter<MyBlogsRecy
         mValues.clear();
     }
 
-    public void updateList(List<String> newDatas, boolean hasMore) {
+    public void updateList(List<Blog> newDatas, boolean hasMore) {
         if (newDatas != null) {
+            if(mValues.size() > 0) {
+                mValues.remove(mValues.size()-1);
+            }
             mValues.addAll(newDatas);
+            mValues.add(new Blog("", "",0L, ""));
         }
         this.hasMore = hasMore;
         notifyDataSetChanged();
     }
 
     class NormalHolder extends ViewHolder {
-        private TextView textView;
-
+        private TextView title;
+        private TextView user;
+        private TextView time;
         public NormalHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.tv);
+            title = itemView.findViewById(R.id.blog_title);
+            user = itemView.findViewById(R.id.blog_user);
+            time = itemView.findViewById(R.id.blog_time);
         }
     }
 
@@ -125,9 +142,11 @@ public class MyBlogsRecyclerViewAdapter extends RecyclerView.Adapter<MyBlogsRecy
             tips = itemView.findViewById(R.id.tips);
         }
     }
+
     public boolean isFadeTips() {
         return fadeTips;
     }
+
     public int getRealLastPosition() {
         return mValues.size();
     }
