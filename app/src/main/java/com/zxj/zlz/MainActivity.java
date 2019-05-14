@@ -1,5 +1,6 @@
 package com.zxj.zlz;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.PersistableBundle;
@@ -147,6 +148,9 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onListFragmentInteraction(Blog item) {
 
+        Intent intent = new Intent(MainActivity.this, BlogPaper.class);
+        intent.putExtra("blog", item);
+        startActivity(intent);
     }
 
     private void hideFragments(FragmentTransaction pTransaction) {

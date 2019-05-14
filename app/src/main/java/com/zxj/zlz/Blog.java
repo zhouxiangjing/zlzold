@@ -1,10 +1,11 @@
 package com.zxj.zlz;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Blog {
+public class Blog implements Serializable {
     String title;
     String user;
     String time;
