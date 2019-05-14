@@ -19,7 +19,7 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyBlogsRecyclerViewAdapter extends RecyclerView.Adapter<MyBlogsRecyclerViewAdapter.ViewHolder> {
+public class BlogsAdapter extends RecyclerView.Adapter<BlogsAdapter.ViewHolder> {
 
     private final List<Blog> mValues;
     private final OnListFragmentInteractionListener mListener;
@@ -34,7 +34,7 @@ public class MyBlogsRecyclerViewAdapter extends RecyclerView.Adapter<MyBlogsRecy
     private boolean fadeTips = false;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    public MyBlogsRecyclerViewAdapter(Context context, List<Blog> items, OnListFragmentInteractionListener listener) {
+    public BlogsAdapter(Context context, List<Blog> items, OnListFragmentInteractionListener listener) {
         this.context = context;
         this.mValues = items;
         this.mListener = listener;
@@ -57,10 +57,17 @@ public class MyBlogsRecyclerViewAdapter extends RecyclerView.Adapter<MyBlogsRecy
             return;
         }
         if (holder instanceof NormalHolder) {
-            Blog blog = mValues.get(position);
+            final Blog blog = mValues.get(position);
             ((NormalHolder) holder).title.setText(blog.title);
             ((NormalHolder) holder).user.setText(blog.user);
             ((NormalHolder) holder).time.setText(blog.time);
+
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onListFragmentInteraction(blog);
+                }
+            });
         } else {
             ((FootHolder) holder).tips.setVisibility(View.VISIBLE);
             if (hasMore == true) {
@@ -89,37 +96,30 @@ public class MyBlogsRecyclerViewAdapter extends RecyclerView.Adapter<MyBlogsRecy
         return mValues.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position == getItemCount() - 1) {
+            return footType;
+        } else {
+            return normalType;
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mContentView;
-        public String mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mContentView = view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
         }
     }
 
-    public void resetDatas() {
-        mValues.clear();
+    public boolean isFadeTips() {
+        return fadeTips;
     }
 
-    public void updateList(List<Blog> newDatas, boolean hasMore) {
-        if (newDatas != null) {
-            if(mValues.size() > 0) {
-                mValues.remove(mValues.size()-1);
-            }
-            mValues.addAll(newDatas);
-            mValues.add(new Blog("", "",0L, ""));
-        }
-        this.hasMore = hasMore;
-        notifyDataSetChanged();
+    public int getRealLastPosition() {
+        return mValues.size();
     }
 
     class NormalHolder extends ViewHolder {
@@ -143,20 +143,19 @@ public class MyBlogsRecyclerViewAdapter extends RecyclerView.Adapter<MyBlogsRecy
         }
     }
 
-    public boolean isFadeTips() {
-        return fadeTips;
+    public void resetDatas() {
+        mValues.clear();
     }
 
-    public int getRealLastPosition() {
-        return mValues.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (position == getItemCount() - 1) {
-            return footType;
-        } else {
-            return normalType;
+    public void updateList(List<Blog> newDatas, boolean hasMore) {
+        if (newDatas != null) {
+            if(mValues.size() > 0) {
+                mValues.remove(mValues.size()-1);
+            }
+            mValues.addAll(newDatas);
+            mValues.add(new Blog("", "",0L, ""));
         }
+        this.hasMore = hasMore;
+        notifyDataSetChanged();
     }
 }

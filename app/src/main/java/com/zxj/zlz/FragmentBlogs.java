@@ -49,7 +49,7 @@ public class FragmentBlogs extends Fragment implements SwipeRefreshLayout.OnRefr
 
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
-    private MyBlogsRecyclerViewAdapter mBlogsAdapter;
+    private BlogsAdapter mBlogsAdapter;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     static  final int SUCCESS=1;
@@ -126,7 +126,7 @@ public class FragmentBlogs extends Fragment implements SwipeRefreshLayout.OnRefr
         recyclerView.setLayoutManager(mLayoutManager);
 
         List<Blog> newDatas = getDatas(0, PAGE_COUNT);
-        mBlogsAdapter = new MyBlogsRecyclerViewAdapter(view.getContext(), newDatas,  mListener);
+        mBlogsAdapter = new BlogsAdapter(view.getContext(), newDatas,  mListener);
         recyclerView.setAdapter(mBlogsAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -185,7 +185,7 @@ public class FragmentBlogs extends Fragment implements SwipeRefreshLayout.OnRefr
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(String item);
+        void onListFragmentInteraction(Blog item);
     }
 
     private List<Blog> getDatas(final int firstIndex, final int lastIndex) {
