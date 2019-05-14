@@ -1,14 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FragmentHome">
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/GridLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="2"
+    android:orientation="horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="hello_blank_fragment home" />
+    <Button
+    android:layout_columnWeight="1"
+    android:layout_gravity="fill"
+    android:text="功能" />
 
-</FrameLayout>
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="功能" />
+
+</GridLayout>
