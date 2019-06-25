@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements
                 return false;
             }
         });
+
+        int nn = Jni.test();
+
     }
 
     //方法：发送网络请求，获取百度首页的数据。在里面开启线程
@@ -142,8 +145,15 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onFragmentInteraction(int x, int y) {
+
+        int nn = 0;
+    }
+
+    @Override
     public void onFragmentInteraction(Uri uri) {
 
+        int nn = 0;
     }
 
     @Override

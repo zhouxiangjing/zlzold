@@ -55,17 +55,14 @@ public class FragmentHome extends Fragment {
             @Override
             public void onValueChanged(int xDistance, int yDistance) {
                 tv.setText(""+xDistance+","+yDistance);
+
+                if (mListener != null) {
+                    mListener.onFragmentInteraction(xDistance, yDistance);
+                }
             }
         });
 
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -97,6 +94,6 @@ public class FragmentHome extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(int x, int y);
     }
 }
