@@ -20,6 +20,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static java.lang.Math.atan;
+
 public class MainActivity extends AppCompatActivity implements
         FragmentHome.OnFragmentInteractionListener,
         FragmentBlogs.OnListFragmentInteractionListener,
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements
     private FragmentBlogs mFragmentBlogs;
     private FragmentMine mFragmentMine;
     private int lastShowFragment = 0;
+
+    private int connectStatus = 0;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -80,8 +84,9 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        int nn = Jni.test();
-
+        if(0 == Jni.connectServer()) {
+            connectStatus = 1;
+        }
     }
 
     //方法：发送网络请求，获取百度首页的数据。在里面开启线程
@@ -145,9 +150,10 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFragmentInteraction(int x, int y) {
-
-        int nn = 0;
+    public void onFragmentInteraction(float x, float y) {
+        if(0 != Jni.sendData(y, x)) {
+            connectStatus = 0;
+        }
     }
 
     @Override

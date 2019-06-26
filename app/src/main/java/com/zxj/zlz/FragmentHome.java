@@ -53,7 +53,7 @@ public class FragmentHome extends Fragment {
         tv = view.findViewById(R.id.tv);
         wheel.setOnWheelMoveListener(new Wheel.OnWheelMoveListener() {
             @Override
-            public void onValueChanged(int xDistance, int yDistance) {
+            public void onValueChanged(float xDistance, float yDistance) {
                 tv.setText(""+xDistance+","+yDistance);
 
                 if (mListener != null) {
@@ -94,6 +94,6 @@ public class FragmentHome extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(int x, int y);
+        void onFragmentInteraction(float x, float y);
     }
 }

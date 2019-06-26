@@ -100,7 +100,7 @@ public class Wheel extends View implements View.OnTouchListener {
         }
 
         if(this.wheelMoveListener!=null){
-            this.wheelMoveListener.onValueChanged(this.xPosition-this.centerX,this.centerY-this.yPosition);
+            this.wheelMoveListener.onValueChanged((this.xPosition-this.centerX)/(mainRadius*1.0f),(this.centerY-this.yPosition)/(mainRadius*1.0f));
         }
         invalidate();
 
@@ -121,6 +121,6 @@ public class Wheel extends View implements View.OnTouchListener {
     }
 
     public static abstract interface OnWheelMoveListener {
-        public abstract void onValueChanged(int xDistance, int yDistance);
+        public abstract void onValueChanged(float xDistance, float yDistance);
     }
 }
