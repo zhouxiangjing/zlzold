@@ -56,13 +56,29 @@ static CTcpPackClientPtr s_client(&s_listener);
 extern "C" {
 #endif
 
+jint Java_com_zxj_zlz_Jni_test(JNIEnv *env, jobject obj, jfloat y, jfloat x) {
+
+    int nn = sizeof(jfloat);
+
+    char data[8] = {0};
+    memcpy(data, &y, 4);
+    memcpy(data+4, &x, 4);
+
+    float yy = 0.0;
+    float xx = 0.0;
+    memcpy(&yy, data, 4);
+    memcpy(&xx, data+4, 4);
+
+    return 0;
+}
+
 jint Java_com_zxj_zlz_Jni_connectServer(JNIEnv *env, jobject obj) {
 
     s_client->SetMaxPackSize(0x01FFF);
     s_client->SetPackHeaderFlag(0x169);
 
-    LPCTSTR address = "10.33.93.79";
-    int portt = 5555;
+    LPCTSTR address = "192.168.31.202";
+    int portt = 10000;
     if(!s_client->Start(address, portt, false)) {
         EnSocketError ret = s_client->GetLastError();
         LPCTSTR desc = s_client->GetLastErrorDesc();
@@ -76,9 +92,14 @@ jint Java_com_zxj_zlz_Jni_connectServer(JNIEnv *env, jobject obj) {
 
 jint Java_com_zxj_zlz_Jni_sendData(JNIEnv *env, jobject obj, jfloat y, jfloat x) {
 
-    std::string t = "helloworld";
-    const char* data = t.c_str();
-    if(!s_client->Send((const unsigned char*)data, 11)) {
+    LOGI("data y=%f x=%f", y, x);
+
+    char data[9] = {0};
+    memset(data, 0, 9);
+    memcpy(data, &y, 4);
+    memcpy(data+4, &x, 4);
+
+    if(!s_client->Send((const unsigned char*)data, 9)) {
         LOGE("sendData faild %s", s_client->GetLastErrorDesc());
         return -1;
     }

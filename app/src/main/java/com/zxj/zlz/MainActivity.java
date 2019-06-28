@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -84,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
+        //Jni.test(0.93333f, 0.067777f);
+
         if(0 == Jni.connectServer()) {
             connectStatus = 1;
         }
@@ -151,6 +154,9 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onFragmentInteraction(float x, float y) {
+
+        Log.i("MainActivity", "y="+y+" x="+x);
+
         if(0 != Jni.sendData(y, x)) {
             connectStatus = 0;
         }
