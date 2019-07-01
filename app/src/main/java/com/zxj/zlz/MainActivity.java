@@ -1,8 +1,11 @@
 package com.zxj.zlz;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,6 +19,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
+import java.net.SocketException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -85,11 +92,13 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
+        new ScanfPITask().execute();
+
         //Jni.test(0.93333f, 0.067777f);
 
-        if(0 == Jni.connectServer()) {
-            connectStatus = 1;
-        }
+//        if(0 == Jni.connectServer()) {
+//            connectStatus = 1;
+//        }
     }
 
     //方法：发送网络请求，获取百度首页的数据。在里面开启线程
@@ -183,5 +192,45 @@ public class MainActivity extends AppCompatActivity implements
             pTransaction.hide(mFragmentBlogs);
         if (mFragmentMine != null && mFragmentMine.isVisible())
             pTransaction.hide(mFragmentMine);
+    }
+
+    private class ScanfPITask extends AsyncTask<Void, Void, String> {
+
+        private static final int BROADCAST_PORT = 10001;
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            String addr = "";
+            try {
+                DatagramSocket dgSocket = new DatagramSocket(BROADCAST_PORT);
+                dgSocket.setReuseAddress(true);
+                dgSocket.setBroadcast(true);
+
+
+                byte[] by = new byte[1024];
+                DatagramPacket packet = new DatagramPacket(by, by.length);
+                while(true) {
+                    dgSocket.receive(packet);
+                    String signData = new String(packet.getData());
+                    if(signData == "~") {
+                        addr = packet.getAddress().toString();
+                    }
+                }
+
+            } catch (IOException e) {
+                System.err.println("udp init faild." + e.getMessage());
+                int nnn = 0;
+            }
+
+            return addr;
+        }
+
+        @Override
+        protected void onPostExecute(String aVoid) {
+            super.onPostExecute(aVoid);
+
+
+        }
     }
 }
