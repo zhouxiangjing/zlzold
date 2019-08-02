@@ -7,18 +7,39 @@ android:layout_height="match_parent"
 tools:context="com.zxj.zlz.MainActivity"
 android:background="#fff">
 
-<com.zxj.zlz.Wheel
-    android:id="@+id/wheel"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-<TextView
-    android:id="@+id/tv"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"/>
+        <Button
+            android:id="@+id/btn_remote_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="远程控制"
+            android:onClick="onClickRemoteControl"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="其他控制"/>
+
+    </LinearLayout>
+
+
+<!--<com.zxj.zlz.ui.home.Wheel-->
+    <!--android:id="@+id/wheel"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentTop="true" />-->
+
+<!--<TextView-->
+    <!--android:id="@+id/tv"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"/>-->
 
 </RelativeLayout>

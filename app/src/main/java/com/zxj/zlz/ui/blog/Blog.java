@@ -1,4 +1,4 @@
-package com.zxj.zlz;
+package com.zxj.zlz.ui.blog;
 
 import java.io.Serializable;
 import java.text.ParseException;

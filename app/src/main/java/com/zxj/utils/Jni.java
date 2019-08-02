@@ -1,4 +1,4 @@
-package com.zxj.zlz;
+package com.zxj.utils;
 
 public class Jni {
 

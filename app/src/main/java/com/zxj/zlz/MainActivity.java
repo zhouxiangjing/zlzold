@@ -1,34 +1,37 @@
 package com.zxj.zlz;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
+import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
+import com.zxj.utils.Jni;
+import com.zxj.zlz.ui.blog.Blog;
+import com.zxj.zlz.ui.blog.BlogPaper;
+import com.zxj.zlz.ui.blog.FragmentBlogs;
+import com.zxj.zlz.ui.home.FragmentHome;
+import com.zxj.zlz.ui.home.RemoteControl;
+import com.zxj.zlz.ui.mine.FragmentMine;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
-import java.net.SocketException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static java.lang.Math.atan;
 
 public class MainActivity extends AppCompatActivity implements
         FragmentHome.OnFragmentInteractionListener,
@@ -55,6 +58,15 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
+                .methodCount(0)         // (Optional) How many method line to show. Default 2
+                .methodOffset(7)        // (Optional) Hides internal method calls up to offset. Default 5
+                //.logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
+                .tag("ZLZ")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                .build();
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
 
         mFragmentManager = getSupportFragmentManager();
         if(null != savedInstanceState) {
@@ -91,8 +103,6 @@ public class MainActivity extends AppCompatActivity implements
                 return false;
             }
         });
-
-        new ScanfPITask().execute();
 
         //Jni.test(0.93333f, 0.067777f);
 
@@ -194,43 +204,9 @@ public class MainActivity extends AppCompatActivity implements
             pTransaction.hide(mFragmentMine);
     }
 
-    private class ScanfPITask extends AsyncTask<Void, Void, String> {
+    public void onClickRemoteControl(View view) {
 
-        private static final int BROADCAST_PORT = 10001;
-
-        @Override
-        protected String doInBackground(Void... voids) {
-
-            String addr = "";
-            try {
-                DatagramSocket dgSocket = new DatagramSocket(BROADCAST_PORT);
-                dgSocket.setReuseAddress(true);
-                dgSocket.setBroadcast(true);
-
-
-                byte[] by = new byte[1024];
-                DatagramPacket packet = new DatagramPacket(by, by.length);
-                while(true) {
-                    dgSocket.receive(packet);
-                    String signData = new String(packet.getData());
-                    if(signData == "~") {
-                        addr = packet.getAddress().toString();
-                    }
-                }
-
-            } catch (IOException e) {
-                System.err.println("udp init faild." + e.getMessage());
-                int nnn = 0;
-            }
-
-            return addr;
-        }
-
-        @Override
-        protected void onPostExecute(String aVoid) {
-            super.onPostExecute(aVoid);
-
-
-        }
+        Intent intent = new Intent(MainActivity.this, RemoteControl.class);
+        startActivity(intent);
     }
 }

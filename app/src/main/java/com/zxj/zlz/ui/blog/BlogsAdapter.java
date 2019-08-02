@@ -1,4 +1,4 @@
-package com.zxj.zlz;
+package com.zxj.zlz.ui.blog;
 
 import android.content.Context;
 import android.os.Handler;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.zxj.zlz.FragmentBlogs.OnListFragmentInteractionListener;
+import com.zxj.zlz.ui.blog.FragmentBlogs.OnListFragmentInteractionListener;
+import com.zxj.zlz.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

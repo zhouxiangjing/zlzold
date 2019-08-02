@@ -56,7 +56,7 @@ static CTcpPackClientPtr s_client(&s_listener);
 extern "C" {
 #endif
 
-jint Java_com_zxj_zlz_Jni_test(JNIEnv *env, jobject obj, jfloat y, jfloat x) {
+jint Java_com_zxj_utils_Jni_test(JNIEnv *env, jobject obj, jfloat y, jfloat x) {
 
     int nn = sizeof(jfloat);
 
@@ -72,7 +72,7 @@ jint Java_com_zxj_zlz_Jni_test(JNIEnv *env, jobject obj, jfloat y, jfloat x) {
     return 0;
 }
 
-jint Java_com_zxj_zlz_Jni_connectServer(JNIEnv *env, jobject obj) {
+jint Java_com_zxj_utils_Jni_connectServer(JNIEnv *env, jobject obj) {
 
     s_client->SetMaxPackSize(0x01FFF);
     s_client->SetPackHeaderFlag(0x169);
@@ -90,7 +90,7 @@ jint Java_com_zxj_zlz_Jni_connectServer(JNIEnv *env, jobject obj) {
     return 0;
 }
 
-jint Java_com_zxj_zlz_Jni_sendData(JNIEnv *env, jobject obj, jfloat y, jfloat x) {
+jint Java_com_zxj_utils_Jni_sendData(JNIEnv *env, jobject obj, jfloat y, jfloat x) {
 
     LOGI("data y=%f x=%f", y, x);
 

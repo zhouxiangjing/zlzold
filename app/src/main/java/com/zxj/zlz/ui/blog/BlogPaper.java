@@ -1,9 +1,11 @@
-package com.zxj.zlz;
+package com.zxj.zlz.ui.blog;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.zxj.zlz.R;
 
 public class BlogPaper extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.zxj.zlz;
+package com.zxj.zlz.ui.home;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,6 +12,8 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.zxj.zlz.R;
 
 public class Wheel extends View implements View.OnTouchListener {
 
