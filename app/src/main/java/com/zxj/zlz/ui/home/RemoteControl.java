@@ -18,9 +18,13 @@ import com.zxj.zlz.R;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RemoteControl extends AppCompatActivity {
     AlertDialog alertDialog;
+    //HashMap<String, Long> deviceInfos = new HashMap<String, Long>();
+    //DevicesAdapter deviceInfos = new DevicesAdapter();
     String[] provinces = new String[]{"河南省","安徽省","北京市","上海市"};
 
     @Override
