@@ -13,9 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".ui.home.RemoteControl"
-            android:label="@string/remote_ontrol"
-            android:screenOrientation="portrait"
-            android:theme="@style/ThemeActivity.NoActionBar"/>
+            android:label="@string/remote_ontrol"/>
 
         <activity android:name=".ui.blog.BlogPaper" />
 

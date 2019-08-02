@@ -1,7 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
+
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Default height of an action bar. -->
+    <dimen name="abc_action_bar_default_height">48dip</dimen>
+
+    <dimen name="text_size_little">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+
+    <dimen name="edit_height">45dip</dimen>
+
+
+    <dimen name="chart_item_margin">10dp</dimen>
+
+
+    <dimen name="multi_btn_width">180dip</dimen>
+    <dimen name="tipSize">20sp</dimen>
+    <dimen name="imgPaddingTop">80dip</dimen>
+
+    <dimen name="news_title">16dp</dimen>
+    <dimen name="news_bottom">12dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+    <dimen name="normal_radius">4dp</dimen>
+
+    <dimen name="card_margin">5dp</dimen>
+    <!-- news -->
+    <dimen name="news_list_item__margin_tb">9.3dp</dimen>
+    <dimen name="news_list_item__margin_lr">9dp</dimen>
+    <dimen name="news_list_item_divider_height">0.5dp</dimen>
+
+    <dimen name="news_list_item_icon_width">105.3dp</dimen>
+    <dimen name="news_list_item_one_icon_margin_left">11dp</dimen>
+    <dimen name="news_list_item_three_icon_margin_tb">8dp</dimen>
+    <dimen name="news_list_item_three_icon_margin_lr">4dp</dimen>
+
+    <dimen name="news_list_item_title_size">16dp</dimen>
+    <dimen name="news_list_item_text_size">13.3dp</dimen>
+
+    <dimen name="news_list_header_height">173.3dp</dimen>
+    <dimen name="news_list_header_indication_height">32dp</dimen>
+    <dimen name="news_list_header_indication_margin_width">15dp</dimen>
+
+    <!--monitoring-->
+    <dimen name="monitoring_battery_list_item_divider_height">1.67dp</dimen>
+    <dimen name="monitoring_battery_list_item_one_height">121.67dp</dimen>
+    <dimen name="monitoring_battery_list_item_one_battery_width">58.33dp</dimen>
+    <dimen name="monitoring_battery_list_item_one_battery_height">96dp</dimen>
+    <!--<dimen name="monitoring_battery_list_item_one_battery_margin_left">63.33dp</dimen>-->
+    <dimen name="monitoring_battery_list_item_one_textvalue_margin_left">7.67dp</dimen>
+    <dimen name="monitoring_battery_list_item_one_text_margin_top_bottom">9.17dp</dimen>
+    <dimen name="monitoring_battery_list_item_one_chongdian_width">10dp</dimen>
+    <dimen name="monitoring_battery_list_item_one_chongdian_height">14dp</dimen>
+    <!--<dimen name="monitoring_battery_list_item_one_chongdian_margin_left">87.5dp</dimen>-->
+    <dimen name="monitoring_battery_list_item_one_chongdian_margin_bottom">18dp</dimen>
+
+    <dimen name="monitoring_battery_item_height">236.67dp</dimen>
+    <dimen name="monitoring_battery_item_title_height">50dp</dimen>
+    <dimen name="monitoring_battery_item_title_margin_top">15dp</dimen>
+    <dimen name="monitoring_battery_item_title_icon_margin_right">5.67dp</dimen>
+    <dimen name="monitoring_battery_item_chart_height">180dp</dimen>
+    <dimen name="monitoring_battery_item_chart_margin_left_right">9.33dp</dimen>
+    <dimen name="monitoring_battery_item_chart_tishi_width">250.67dp</dimen>
+    <dimen name="monitoring_battery_item_chart_tishi_margin_top">116dp</dimen>
+    <dimen name="monitoring_battery_item_chart_tishi_icon_width">11.33dp</dimen>
+    <dimen name="monitoring_battery_item_chart_tishi_icon_height">11.33dp</dimen>
+    <dimen name="monitoring_battery_item_chart_tishi_icon_margin_right">3.33dp</dimen>
+
+    <dimen name="monitoring_cpu_item_chart_one_height">123dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_one_middle_line_width">0.5dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_one_middle_line_height">52.33dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_one_label_margin_bottom">18.33dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_shishi_subchart_height">121.67dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_shishi_subchart_margin_bottom">8dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_shishi_subtitle_height">16dp</dimen>
+    <dimen name="monitoring_item_chart_subtitle_label_width">48dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_single_core_margin_bottom">3dp</dimen>
+
+
+    <dimen name="monitoring_battery_list_item_one_battery_percent_size">20sp</dimen>
+    <dimen name="monitoring_battery_list_item_one_battery_text_size">13.33sp</dimen>
+    <dimen name="monitoring_battery_item_title_text_size">14.67dp</dimen>
+    <dimen name="monitoring_battery_item_suntitle_text_size">11dp</dimen>
+    <dimen name="monitoring_battery_item_chart_tishi_text_size">10.67dp</dimen>
+
+    <dimen name="monitoring_cpu_item_chart_item_one_label_text_size">13.33dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_item_one_value_text_size">26.67dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_shishi_title_text_size">12.67dp</dimen>
+    <dimen name="monitoring_cpu_item_chart_shishi_subtitle_text_size">11dp</dimen>
+
+    <dimen name="charge_prompt_container_width">276.7dp</dimen>
+    <dimen name="charge_prompt_container_height">283.3dp</dimen>
+    <dimen name="charge_prompt_sub_container_height">246.7dp</dimen>
+    <dimen name="charge_prompt_title_margin_top">52dp</dimen>
+    <dimen name="charge_prompt_content_margin_top">19dp</dimen>
+    <dimen name="charge_prompt_content_margin_left_right">23.5dp</dimen>
+    <dimen name="charge_prompt_content_margin_bottom">25dp</dimen>
+    <dimen name="charge_prompt_btn_width">228dp</dimen>
+    <dimen name="charge_prompt_btn_height">35dp</dimen>
+    <dimen name="charge_prompt_margin_top">36.5dp</dimen>
+    <dimen name="charge_prompt_padding_bottom">20.7dp</dimen>
+    <dimen name="charge_prompt_icon_padding">4dp</dimen>
+
+    <dimen name="charge_prompt_title_size">23.3dp</dimen>
+    <dimen name="charge_prompt_content_size">14.7dp</dimen>
 </resources>

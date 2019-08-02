@@ -1,4 +1,4 @@
-<resources>
+<resources  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -92,5 +92,39 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ActionBarTitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ActionBarSubTitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ActionBarStyle" parent="Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="android:displayOptions" tools:targetApi="11">showHome|showTitle|homeAsUp</item>
+        <item name="android:titleTextStyle" tools:targetApi="11">@style/ActionBarTitleTextStyle</item>
+        <item name="android:subtitleTextStyle" tools:targetApi="11">@style/ActionBarSubTitleTextStyle</item>
+        <!-- Support library compatibility -->
+        <item name="displayOptions">showHome|showTitle|homeAsUp</item>
+        <item name="titleTextStyle">@style/ActionBarTitleTextStyle</item>
+        <item name="subtitleTextStyle">@style/ActionBarSubTitleTextStyle</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- ToolBar -->
+    <style name="ToolBarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="popupTheme">@style/ThemeApp</item>
+        <item name="android:background">@color/colorPrimary_day</item>
+        <item name="titleTextAppearance">@style/Toolbar.TitleText</item>
+        <!--<item name="contentInsetStart">0dp</item>-->
+        <!--<item name="contentInsetLeft">0dp</item>-->
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
 
 </resources>

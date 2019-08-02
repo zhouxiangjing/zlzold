@@ -1,13 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <!--<color name="colorAccent">#D81B60</color>-->
     <color name="colorLines">#CCCCCC</color>
 
-    <!-- 描边颜色 -->
+    <!--&lt;!&ndash; 描边颜色 &ndash;&gt;-->
     <color name="border_clo">#ccc</color>
     <color name="text_clo">#333</color>
-    <color name="white">#fff</color>
     <color name="blue">#419DE4</color>
+
+    <color name="colorPrimary">#FF266ce1</color>
+    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="colorPrimaryDark">@color/colorPrimary</color>
+    <color name="color_primary">#FF266ce1</color>
+
+    <color name="colorPrimary_day">#FF266ce1</color>
+    <color name="colorAccent_day">@color/colorPrimary_day</color>
+    <color name="colorPrimaryDark_day">@color/colorPrimary_day</color>
+    <color name="textColor">#FF4f514e</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="transparent_black">#99000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="ranking_bg">#1c1c1c</color>
+    <color name="black">#FF000000</color>
+    <color name="primary_blue">#FF266cff</color>
+    <color name="orange">#FFFF8000</color>
+    <color name="top_test_bg">#27282A</color>
+    <color name="light_red">#FFE05245</color>
+    <color name="shallow_gray_text">#FF999999</color>
+    <color name="layout_background">#FF1c1c1c</color>
+    <color name="green_lime">#5ac65c</color>
+    <color name="green_line">#FF04ba15</color>
+    <color name="search_hint">#FF999999</color>
+    <color name="search_divider">#bebebe</color>
+    <color name="search_suggestion_item">#9B9B9B</color>
+    <color name="search_suggestion_pressed">#f9f9f9</color>
+    <color name="dark_blue">#1C2329</color>
+    <color name="bg_home_list">#FFEFEEEE</color>
+    <color name="gray">#666666</color>
+    <color name="text_small">#666666</color>
+    <color name="text_big">#999999</color>
+
+    <!-- device list -->
+
+    <!-- screen entry list -->
+
+    <!--slidemenu-->
+    <color name="common_view_title">#FF333333</color>
+    <color name="feedback_edittext_bg">#FFEDEDED</color>
+
+    <!-- home menu begin -->
+    <color name="home_bottom_line">#FFc5c0c0</color>
+    <color name="home_bottom_text_normal">#FF4f514e</color>
+    <color name="home_bottom_text_pressed">@color/colorPrimary_day</color>
+    <!-- home menu end -->
+
+    <color name="round_corner_progress_bar_background_default">#5f5f5f</color>
+    <color name="round_corner_progress_bar_progress_default">#7f7f7f</color>
+    <color name="round_corner_progress_bar_secondary_progress_default">@android:color/transparent</color>
+
+
+
+    <color name="news_subhead">#FF999999</color>
+    <color name="news_list_divider">#FFEFEFEF</color>
+    <color name="news_item_pressed">#FFEEEEEE</color>
+
+
+    <color name="comment_item_color">#999999</color>
+
+
+    <!-- Verify -->
+    <color name="verify_bg">@color/color_primary</color>
+    <color name="verify_error_bg">#FFd54442</color>
+    <color name="verify_unknown_bg">#FFf18138</color>
+    <color name="verify_other_bg">#FFffb500</color>
+
+    <!-- psts -->
+    <color name="psts_indicator">#FF3e93f4</color>
+    <color name="psts_under_line">#FFececec</color>
+    <color name="psts_text_selected">#FF3e93f4</color>
+
+    <!-- TestScreen -->
+    <color name="testscreen_bg">#FFECECEC</color>
+    <color name="testscreen_item_bg">#FFFFFFFF</color>
+    <color name="testscreen_divider">#FFECECEC</color>
+    <color name="testscreen_item_name">#FF090909</color>
+    <color name="testscreen_item_desc">#FF4F514E</color>
+
+    <!-- TestStress -->
+    <color name="teststress_text_percent">#FF313131</color>
+    <color name="teststress_text_percent_unit">#FF276CE1</color>
+    <color name="teststress_progress_bg">#FF276CE1</color>
+    <color name="teststress_button_text">#FFEFEFEF</color>
+    <color name="teststress_testing_text">#FF4F514E</color>
+    <color name="teststress_testing_desc">#FF4F514E</color>
+    <color name="teststress_progress_bt">#3E93F4</color>
+    <color name="teststress_chart_axis">#d4ebfb</color>
+    <color name="teststress_chart_line">#82cbfd</color>
+    <color name="teststress_chart_fill">#f4faff</color>
+
+    <!-- search -->
+    <color name="footer_code_color">#ff212121</color>
+    <color name="text_search_failed_or_noresult">#FF4A4A4A</color>
+    <!-- news -->
+    <color name="news_list_item_title_color">#333333</color>
+    <color name="news_list_item_text_color">#999</color>
+    <color name="news_list_item_divider_color">#e9e9e9</color>
+    <color name="news_list_header_indication_selected_color">#fff</color>
+
+    <!-- monitoring -->
+    <color name="monitoring_list_item_divider_color">#000000</color>
+    <color name="monitoring_battery_list_item_color_blue">#3e93f4</color>
+    <color name="monitoring_battery_list_item_color_orange">#f46f04</color>
+    <color name="monitoring_battery_list_item_color_grey">#777777</color>
+
+    <color name="monitoring_battery_item_chart_bg_color">#fcfcfc</color>
+    <color name="monitoring_item_chart_grid_color">#e3e3e3</color>
+
 </resources>
