@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RemoteControl extends AppCompatActivity {
+
+    WebView webView;
     AlertDialog alertDialog;
     //HashMap<String, Long> deviceInfos = new HashMap<String, Long>();
     //DevicesAdapter deviceInfos = new DevicesAdapter();
@@ -38,7 +42,24 @@ public class RemoteControl extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        new ScanfPITask().execute();
+        //new ScanfPITask().execute();
+
+        webView = findViewById(R.id.web_view);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.setWebViewClient(new WebViewClient());
+        //webView.loadUrl("https://www.baidu.com");
+        webView.loadUrl("file:///android_asset/index.html");
+    }
+
+    @Override
+    public void onBackPressed() {
+//        if(webView.canGoBack()) {
+//            webView.goBack();
+//        } else {
+//            super.onBackPressed();
+//        }
+        super.onBackPressed();
     }
 
     @Override

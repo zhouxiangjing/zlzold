@@ -7,15 +7,20 @@
     android:orientation="vertical"
     tools:context=".ui.home.RemoteControl">
 
-    <TextView
-        android:id="@+id/tv_device_addr"
+    <!--<TextView-->
+        <!--android:id="@+id/tv_device_addr"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:gravity="center"-->
+        <!--android:onClick="onClickDeviceAddr"-->
+        <!--android:padding="20dp"-->
+        <!--android:text="000.000.000.000"-->
+        <!--android:textSize="24sp" />-->
+
+    <WebView
+        android:id="@+id/web_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:gravity="center"
-        android:onClick="onClickDeviceAddr"
-        android:padding="20dp"
-        android:text="000.000.000.000"
-        android:textSize="24sp" />
+        android:layout_height="match_parent"></WebView>
 
 </LinearLayout>
