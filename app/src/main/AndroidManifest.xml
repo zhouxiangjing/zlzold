@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".ui.home.RemoteControl"
-            android:label="@string/remote_ontrol"/>
+                  android:label="@string/remote_ontrol"
+                  android:hardwareAccelerated="true"
+                  android:configChanges="orientation|screenSize|keyboardHidden"/>
 
         <activity android:name=".ui.blog.BlogPaper" />
 
