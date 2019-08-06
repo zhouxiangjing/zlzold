@@ -23,7 +23,8 @@ android:background="#fff">
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="其他控制"/>
+            android:text="其他控制"
+            android:onClick="onClickOtherControl"/>
 
     </LinearLayout>
 
@@ -36,10 +37,10 @@ android:background="#fff">
     <!--android:layout_alignParentStart="true"-->
     <!--android:layout_alignParentTop="true" />-->
 
-<!--<TextView-->
-    <!--android:id="@+id/tv"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentBottom="true"/>-->
+<TextView
+    android:id="@+id/tv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

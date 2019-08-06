@@ -3,7 +3,6 @@ package com.zxj.zlz;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -23,12 +22,11 @@ import com.zxj.zlz.ui.blog.Blog;
 import com.zxj.zlz.ui.blog.BlogPaper;
 import com.zxj.zlz.ui.blog.FragmentBlogs;
 import com.zxj.zlz.ui.home.FragmentHome;
+import com.zxj.zlz.ui.home.OtherControl;
 import com.zxj.zlz.ui.home.RemoteControl;
 import com.zxj.zlz.ui.mine.FragmentMine;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -211,4 +209,22 @@ public class MainActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    public void onClickOtherControl(View view) {
+
+        Intent intent = new Intent(MainActivity.this, OtherControl.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            int nn = 0;
+        }
+
+        if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT){
+            int nnn = 0;
+        }
+    }
 }

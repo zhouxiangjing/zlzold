@@ -1,16 +1,13 @@
 package com.zxj.zlz.ui.home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -33,7 +30,7 @@ import java.net.DatagramSocket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RemoteControl extends AppCompatActivity {
+public class RemoteControl extends Activity {
 
     WebView webView;
     AlertDialog alertDialog;
@@ -62,18 +59,12 @@ public class RemoteControl extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        webView.reload();
+        if(webView != null) {
+            webView.reload();
+        }
     }
 
-    @Override
-    public void onBackPressed() {
-//        if(webView.canGoBack()) {
-//            webView.goBack();
-//        } else {
-//            super.onBackPressed();
-//        }
-        super.onBackPressed();
-    }
+
 
     public void onClickDeviceAddr(View view) {
 
