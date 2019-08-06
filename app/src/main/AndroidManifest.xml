@@ -14,12 +14,16 @@
 
         <activity android:name=".ui.home.RemoteControl"
                   android:label="@string/remote_ontrol"
+                  android:theme="@style/ThemeActivity.NoActionBar.Fullscreen"
                   android:hardwareAccelerated="true"
+                  android:screenOrientation="landscape"
                   android:configChanges="orientation|screenSize|keyboardHidden"/>
 
         <activity android:name=".ui.blog.BlogPaper" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,6 +1,7 @@
 package com.zxj.zlz;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -209,4 +210,5 @@ public class MainActivity extends AppCompatActivity implements
         Intent intent = new Intent(MainActivity.this, RemoteControl.class);
         startActivity(intent);
     }
+
 }
