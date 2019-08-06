@@ -172,7 +172,8 @@ public class RemoteControl extends Activity {
         });
 
         // 加载Web地址
-        webView.loadUrl("https://v.qq.com/txp/iframe/player.html?vid=b0765olk75e");
+        //webView.loadUrl("file:///android_asset/index.html");
+        webView.loadUrl("http://192.168.31.202:8080/?action=stream");
     }
 
     /** 视频播放全屏 **/
@@ -231,16 +232,16 @@ public class RemoteControl extends Activity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
-//            case KeyEvent.KEYCODE_BACK:
-//                /** 回退键 事件处理 优先级:视频播放全屏-网页回退-关闭页面 */
-//                if (customView != null) {
-//                    hideCustomView();
-//                } else if (webView.canGoBack()) {
-//                    webView.goBack();
-//                } else {
-//                    finish();
-//                }
-//                return true;
+            case KeyEvent.KEYCODE_BACK:
+                /** 回退键 事件处理 优先级:视频播放全屏-网页回退-关闭页面 */
+                if (customView != null) {
+                    hideCustomView();
+                } else if (webView.canGoBack()) {
+                    webView.goBack();
+                } else {
+                    finish();
+                }
+                return true;
             default:
                 return super.onKeyUp(keyCode, event);
         }
