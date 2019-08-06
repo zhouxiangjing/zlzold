@@ -20,6 +20,7 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity android:name=".ui.home.OtherControl"
+            android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"/>
         <activity android:name=".ui.blog.BlogPaper" />

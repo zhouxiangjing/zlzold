@@ -172,8 +172,7 @@ public class RemoteControl extends Activity {
         });
 
         // 加载Web地址
-        //webView.loadUrl("file:///android_asset/index.html");
-        webView.loadUrl("http://192.168.31.202:8080/?action=stream");
+        webView.loadUrl("file:///android_asset/index.html");
     }
 
     /** 视频播放全屏 **/
