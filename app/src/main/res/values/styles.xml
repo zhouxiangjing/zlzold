@@ -122,4 +122,8 @@
         <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
 
+    <style name="MyFullScreenTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

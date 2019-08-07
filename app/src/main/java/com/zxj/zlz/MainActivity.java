@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements
 //        if(0 == Jni.connectServer()) {
 //            connectStatus = 1;
 //        }
+        Intent intent = new Intent(MainActivity.this, OtherControl.class);
+        startActivity(intent);
     }
 
     //方法：发送网络请求，获取百度首页的数据。在里面开启线程
