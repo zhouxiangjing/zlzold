@@ -128,13 +128,19 @@ public class RemoteControl extends Activity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setUseWideViewPort(true);
-        webSettings.setAllowFileAccess(true);
+        //webSettings.setAllowFileAccess(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         webView.setWebViewClient(new MyWebViewClient());
         webView.setWebChromeClient(new MyWebChromeClient());
 
+        webView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
         // 加载Web地址
         webView.loadUrl("file:///android_asset/index.html");
     }
