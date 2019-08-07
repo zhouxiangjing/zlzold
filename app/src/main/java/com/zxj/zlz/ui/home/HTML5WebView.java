@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -54,6 +55,12 @@ public class HTML5WebView extends WebView {
         s.setGeolocationDatabasePath("/data/data/com.jereh.html5webview/databases/");
         s.setDomStorageEnabled(true);
         mContentView.addView(this);
+        mContentView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
     }
     public HTML5WebView(Context context) {
         super(context);
@@ -86,13 +93,13 @@ public class HTML5WebView extends WebView {
         }
         return super.onKeyDown(keyCode, event);
     }
+
     private class MyWebChromeClient extends WebChromeClient {
         private Bitmap mDefaultVideoPoster;
-        private View         mVideoProgressView;
+        private View mVideoProgressView;
         // Android 使WebView支持HTML5 Video（全屏）播放的方法
         @Override
-        public void onShowCustomView(View view, WebChromeClient.CustomViewCallback
-                callback){
+        public void onShowCustomView(View view, WebChromeClient.CustomViewCallback callback){
             HTML5WebView.this.setVisibility(View.GONE);
             // if a view already exists then immediately terminate the new one
             if (mCustomView != null) {
@@ -151,12 +158,13 @@ public class HTML5WebView extends WebView {
             callback.invoke(origin, true, false);
         }
     }
+
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             return false;
         }
     }
-    static final FrameLayout.LayoutParams COVER_SCREEN_PARAMS =
-            new FrameLayout.LayoutParams( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+    static final FrameLayout.LayoutParams COVER_SCREEN_PARAMS = new FrameLayout.LayoutParams( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 }

@@ -26,7 +26,7 @@ public class Wheel extends View implements View.OnTouchListener {
     int mainRadius; // 相对于方向盘圆心的 点击圆形按钮圆心范围
     int secondRadius;   // 点击的圆形按钮的半径
     boolean isClicked;  // 用于判断方向盘是否被点击
-    int offset = 100;
+    int offset = 0;
     OnWheelMoveListener wheelMoveListener;
 
     public Wheel(Context context) {
@@ -70,8 +70,9 @@ public class Wheel extends View implements View.OnTouchListener {
         Paint BackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         BackgroundPaint.setFilterBitmap(true);
         BackgroundPaint.setDither(true);
+        BackgroundPaint.setAlpha(100);
 
-        bm = ((BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.wheel0, null)).getBitmap();
+        bm = ((BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.wheel, null)).getBitmap();
 
         Rect mSrcRect = new Rect(0, 0, bm.getWidth(), bm.getHeight());
         Rect mDestRect = new Rect(offset, offset,getWidth()-offset, getHeight()-offset);
@@ -80,6 +81,7 @@ public class Wheel extends View implements View.OnTouchListener {
         Paint circlePaint = new Paint();
         circlePaint.setColor(Color.parseColor("#52c1bd"));
         circlePaint.setStyle(Paint.Style.FILL);
+        circlePaint.setAlpha(150);
         canvas.drawCircle(this.xPosition, this.yPosition, secondRadius, circlePaint);
     }
 

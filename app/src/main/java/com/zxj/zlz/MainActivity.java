@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements
 //        if(0 == Jni.connectServer()) {
 //            connectStatus = 1;
 //        }
-        Intent intent = new Intent(MainActivity.this, OtherControl.class);
+        Intent intent = new Intent(MainActivity.this, RemoteControl.class);
         startActivity(intent);
     }
 

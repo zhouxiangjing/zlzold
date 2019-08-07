@@ -1,12 +1,8 @@
 package com.zxj.zlz.ui.home;
 
 import android.app.Activity;
-import android.content.res.Configuration;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
-
-import com.zxj.zlz.R;
 
 public class OtherControl extends Activity {
 
@@ -45,10 +41,5 @@ public class OtherControl extends Activity {
             }
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
     }
 }
