@@ -7,21 +7,21 @@
     tools:context=".ui.home.RemoteControl"
     android:id="@+id/remote_control">
 
-    <!--<TextView-->
-        <!--android:id="@+id/tv_device_addr"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:clickable="true"-->
-        <!--android:gravity="center"-->
-        <!--android:onClick="onClickDeviceAddr"-->
-        <!--android:padding="20dp"-->
-        <!--android:text="000.000.000.000"-->
-        <!--android:textSize="24sp" />-->
-
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/device_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="000.000.000.000"
+        android:textSize="24sp"
+        android:textColor="@color/light_red"
+        app:layout_constraintLeft_toLeftOf="@+id/remote_control"
+        app:layout_constraintTop_toTopOf="@+id/remote_control"/>
 
     <com.zxj.zlz.ui.home.Wheel
         android:id="@+id/wheel"

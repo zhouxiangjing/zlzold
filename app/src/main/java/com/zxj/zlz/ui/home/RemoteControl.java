@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -14,16 +15,23 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.zxj.zlz.R;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -35,46 +43,42 @@ public class RemoteControl extends Activity {
 
     WebView webView;
     AlertDialog alertDialog;
-    //HashMap<String, Long> deviceInfos = new HashMap<String, Long>();
-    //DevicesAdapter deviceInfos = new DevicesAdapter();
-    String[] provinces = new String[]{"河南省","安徽省","北京市","上海市"};
 
-    /** 视频全屏参数 */
-    protected static final FrameLayout.LayoutParams COVER_SCREEN_PARAMS = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-    private View customView;
-    private FrameLayout fullscreenContainer;
-    private WebChromeClient.CustomViewCallback customViewCallback;
+    String htmlDataStart = "<!DOCTYPE HTML>\n" +
+            "<html>\n" +
+            "<body style=\"overflow-x: hidden;overflow-y: hidden;margin: 0; padding: 0;\">\n" +
+            "    <div style=\"position:absolute; width:100%; height:100%; z-index:-1\">\n" +
+            "        <img style=\"-webkit-user-select:none; max-width: 100%; margin: 0; padding: 0;\" src=\"";
 
+    String htmlDataEnd = "\" height=\"100%\" width=\"100%\"/>\n" +
+    "    </div>\n" +
+    "</body>\n" +
+    "</html>";
+
+    ScanfPITask scanfPITask;
+    TextView tvDeviceAddr;
+    boolean isFinished = false;
+    String deviceAddr = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote_control);
 
+        tvDeviceAddr = findViewById(R.id.device_addr);
+        scanfPITask = new ScanfPITask();
+        scanfPITask.execute();
         initWebView();
-
-        //new ScanfPITask().execute();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        if(scanfPITask !=null && scanfPITask.getStatus() == AsyncTask.Status.RUNNING){
+            scanfPITask.cancel(true);
+        }
+        isFinished = true;
+        deviceAddr = "";
         webView.stopLoading();
-    }
-
-    public void onClickDeviceAddr(View view) {
-
-        alertDialog = new AlertDialog.Builder(RemoteControl.this)
-        .setTitle("选择省份")
-        .setSingleChoiceItems(provinces, -1, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //index是一个int类型的类变量，保存当前选中的列表项索引
-                final int index = which;
-                alertDialog.dismiss();
-            }
-
-        }).setPositiveButton("关闭", null).show();
     }
 
     private class ScanfPITask extends AsyncTask<Void, String, String> {
@@ -85,6 +89,7 @@ public class RemoteControl extends Activity {
         protected String doInBackground(Void... voids) {
             Logger.i("ScanfPITask start.");
             String addr = "";
+
             try {
                 DatagramSocket dgSocket = new DatagramSocket(BROADCAST_PORT);
                 dgSocket.setReuseAddress(true);
@@ -101,9 +106,9 @@ public class RemoteControl extends Activity {
                     if(isFinishing())
                         break;
                 }
-
+                dgSocket.close();
             } catch (IOException e) {
-                Logger.i("udp init faild." + e.getMessage());
+                Logger.i("udp init faild. " + e.getMessage());
             }
             Logger.i("ScanfPITask end.");
             return addr;
@@ -112,14 +117,17 @@ public class RemoteControl extends Activity {
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-            Logger.i("udp addr." + values[0]);
+            String data =  values[0];
+            if(!isFinished && !data.equals(deviceAddr)) {
+                deviceAddr = data;
+                tvDeviceAddr.setText(deviceAddr);
+                webView.loadData(htmlDataStart + "http://" + deviceAddr + ":8080/?action=stream" + htmlDataEnd, "text/html", "utf-8");
+            }
         }
 
         @Override
         protected void onPostExecute(String aVoid) {
             super.onPostExecute(aVoid);
-
-
         }
     }
 
@@ -127,6 +135,7 @@ public class RemoteControl extends Activity {
         webView = findViewById(R.id.web_view);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
         webSettings.setUseWideViewPort(true);
         //webSettings.setAllowFileAccess(true);
         webSettings.setLoadWithOverviewMode(true);
@@ -141,8 +150,8 @@ public class RemoteControl extends Activity {
                 return true;
             }
         });
-        // 加载Web地址
-        webView.loadUrl("file:///android_asset/index.html");
+        //webView.loadData(htmlDataStart + "http://" + "192.168.31.202" + ":8080/?action=stream" + htmlDataEnd, "text/html", "utf-8");
+        //webView.loadUrl("file:///android_asset/index.html");
     }
 
     @Override
@@ -164,6 +173,7 @@ public class RemoteControl extends Activity {
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             return super.shouldOverrideUrlLoading(view, request);
         }
+
     }
 
     private class MyWebChromeClient extends WebChromeClient {
