@@ -42,7 +42,6 @@ import java.util.HashMap;
 public class RemoteControl extends Activity {
 
     WebView webView;
-    AlertDialog alertDialog;
 
     String htmlDataStart = "<!DOCTYPE HTML>\n" +
             "<html>\n" +
@@ -58,11 +57,13 @@ public class RemoteControl extends Activity {
     ScanfPITask scanfPITask;
     TextView tvDeviceAddr;
     boolean isFinished = false;
-    String deviceAddr = "";
+    int isStopLoading = -1;
+    String deviceAddr = "000.000.000.000";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote_control);
+        Logger.i("onCreate");
 
         tvDeviceAddr = findViewById(R.id.device_addr);
         scanfPITask = new ScanfPITask();
@@ -71,24 +72,68 @@ public class RemoteControl extends Activity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Logger.i("onStart");
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
+        Logger.i("onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Logger.i("onRestart");
+    }
+
+    @Override
+    public void onStateNotSaved() {
+        super.onStateNotSaved();
+        Logger.i("onStateNotSaved");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Logger.i("onResume");
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Logger.i("onPostResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Logger.i("onPause");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Logger.i("onDestroy");
+
         if(scanfPITask !=null && scanfPITask.getStatus() == AsyncTask.Status.RUNNING){
             scanfPITask.cancel(true);
         }
-        isFinished = true;
-        deviceAddr = "";
-        webView.stopLoading();
+
+        if ((webView == null) && webView.canGoBack()) {
+            webView.goBack();
+        }
     }
 
-    private class ScanfPITask extends AsyncTask<Void, String, String> {
+    private class ScanfPITask extends AsyncTask<Void, String, Void> {
 
         private static final int BROADCAST_PORT = 10001;
 
         @Override
-        protected String doInBackground(Void... voids) {
+        protected Void doInBackground(Void... voids) {
             Logger.i("ScanfPITask start.");
-            String addr = "";
 
             try {
                 DatagramSocket dgSocket = new DatagramSocket(BROADCAST_PORT);
@@ -101,7 +146,8 @@ public class RemoteControl extends Activity {
                     dgSocket.receive(packet);
                     String signData = new String(packet.getData());
                     if(signData.contains("~")) {
-                        publishProgress(packet.getAddress().toString().replaceAll("/", ""));
+                        String addr = packet.getAddress().toString().replaceAll("/", "");
+                        publishProgress(addr);
                     }
                     if(isFinishing())
                         break;
@@ -111,22 +157,23 @@ public class RemoteControl extends Activity {
                 Logger.i("udp init faild. " + e.getMessage());
             }
             Logger.i("ScanfPITask end.");
-            return addr;
+            return null;
         }
 
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             String data =  values[0];
-            if(!isFinished && !data.equals(deviceAddr)) {
+            if(!data.equals(deviceAddr)) {
                 deviceAddr = data;
                 tvDeviceAddr.setText(deviceAddr);
+                isStopLoading = 1;
                 webView.loadData(htmlDataStart + "http://" + deviceAddr + ":8080/?action=stream" + htmlDataEnd, "text/html", "utf-8");
             }
         }
 
         @Override
-        protected void onPostExecute(String aVoid) {
+        protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
         }
     }
