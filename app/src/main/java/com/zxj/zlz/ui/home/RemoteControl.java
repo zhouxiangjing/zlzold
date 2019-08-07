@@ -123,7 +123,11 @@ public class RemoteControl extends Activity {
         }
 
         if ((webView == null) && webView.canGoBack()) {
+            webView.stopLoading();
             webView.goBack();
+            webView.clearCache(true);
+            webView.clearHistory();
+            webView.destroy();
         }
     }
 
