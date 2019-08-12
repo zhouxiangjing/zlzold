@@ -144,6 +144,7 @@ public class RemoteControl extends Activity {
                 dgSocket.setReuseAddress(true);
                 dgSocket.setBroadcast(true);
 
+
                 byte[] by = new byte[512];
                 DatagramPacket packet = new DatagramPacket(by, by.length);
                 while(true) {
