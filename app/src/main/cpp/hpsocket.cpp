@@ -29,22 +29,22 @@ public:
 private:
     virtual EnHandleResult OnSend(ITcpClient* pSender, CONNID dwConnID, const BYTE* pData, int iLength){
 
-        LOGI("CTcpClientListener OnSend dwConnID=%d iLength=%d", dwConnID, iLength);
+        LOGI("CTcpClientListener OnSend dwConnID=%lu iLength=%d", dwConnID, iLength);
         return HR_OK;
     }
     virtual EnHandleResult OnReceive(ITcpClient* pSender, CONNID dwConnID, const BYTE* pData, int iLength){
 
-        LOGI("CTcpClientListener OnReceive dwConnID=%d iLength=%d pData=%s", dwConnID, iLength, pData);
+        LOGI("CTcpClientListener OnReceive dwConnID=%lu iLength=%d pData=%s", dwConnID, iLength, pData);
         return HR_OK;
     }
     virtual EnHandleResult OnClose(ITcpClient* pSender, CONNID dwConnID, EnSocketOperation enOperation, int iErrorCode){
 
-        LOGI("CTcpClientListener OnClose dwConnID=%d iErrorCode=%d", dwConnID, iErrorCode);
+        LOGI("CTcpClientListener OnClose dwConnID=%lu iErrorCode=%d", dwConnID, iErrorCode);
         return HR_OK;
     }
     virtual EnHandleResult OnConnect(ITcpClient* pSender, CONNID dwConnID)
     {
-        LOGI("CTcpClientListener OnConnect dwConnID=%d", dwConnID);
+        LOGI("CTcpClientListener OnConnect dwConnID=%lu", dwConnID);
         return HR_OK;
     }
 };
@@ -77,8 +77,8 @@ jint Java_com_zxj_utils_Jni_connectServer(JNIEnv *env, jobject obj) {
     s_client->SetMaxPackSize(0x01FFF);
     s_client->SetPackHeaderFlag(0x169);
 
-    LPCTSTR address = "192.168.31.202";
-    int portt = 10000;
+    LPCTSTR address = "192.168.31.152";
+    int portt = 5555;
     if(!s_client->Start(address, portt, false)) {
         EnSocketError ret = s_client->GetLastError();
         LPCTSTR desc = s_client->GetLastErrorDesc();

@@ -208,6 +208,51 @@ HPSOCKET_API BOOL __HP_CALL HP_SSLClient_SetupSSLContext(HP_SSLClient pClient, i
 */
 HPSOCKET_API void __HP_CALL HP_SSLClient_CleanupSSLContext(HP_SSLClient pClient);
 
+/***************************************************************************************/
+/************************************* SSL 操作方法 ************************************/
+
+/*
+* 名称：启动 SSL 握手
+* 描述：当通信组件设置为非自动握手时，需要调用本方法启动 SSL 握手
+*
+* 返回值：	TRUE	-- 成功
+*			FALSE	-- 失败，可通过 SYS_GetLastError() 获取失败原因
+*/
+HPSOCKET_API BOOL __HP_CALL HP_SSLServer_StartSSLHandShake(HP_SSLServer pServer, HP_CONNID dwConnID);
+
+/* 设置通信组件握手方式（默认：TRUE，自动握手） */
+HPSOCKET_API void __HP_CALL HP_SSLServer_SetSSLAutoHandShake(HP_SSLServer pServer, BOOL bAutoHandShake);
+/* 获取通信组件握手方式 */
+HPSOCKET_API BOOL __HP_CALL HP_SSLServer_IsSSLAutoHandShake(HP_SSLServer pServer);
+
+/*
+* 名称：启动 SSL 握手
+* 描述：当通信组件设置为非自动握手时，需要调用本方法启动 SSL 握手
+*
+* 返回值：	TRUE	-- 成功
+*			FALSE	-- 失败，可通过 SYS_GetLastError() 获取失败原因
+*/
+HPSOCKET_API BOOL __HP_CALL HP_SSLAgent_StartSSLHandShake(HP_SSLAgent pAgent, HP_CONNID dwConnID);
+
+/* 设置通信组件握手方式（默认：TRUE，自动握手） */
+HPSOCKET_API void __HP_CALL HP_SSLAgent_SetSSLAutoHandShake(HP_SSLAgent pAgent, BOOL bAutoHandShake);
+/* 获取通信组件握手方式 */
+HPSOCKET_API BOOL __HP_CALL HP_SSLAgent_IsSSLAutoHandShake(HP_SSLAgent pAgent);
+
+/*
+* 名称：启动 SSL 握手
+* 描述：当通信组件设置为非自动握手时，需要调用本方法启动 SSL 握手
+*
+* 返回值：	TRUE	-- 成功
+*			FALSE	-- 失败，可通过 SYS_GetLastError() 获取失败原因
+*/
+HPSOCKET_API BOOL __HP_CALL HP_SSLClient_StartSSLHandShake(HP_SSLClient pClient);
+
+/* 设置通信组件握手方式（默认：TRUE，自动握手） */
+HPSOCKET_API void __HP_CALL HP_SSLClient_SetSSLAutoHandShake(HP_SSLClient pClient, BOOL bAutoHandShake);
+/* 获取通信组件握手方式 */
+HPSOCKET_API BOOL __HP_CALL HP_SSLClient_IsSSLAutoHandShake(HP_SSLClient pClient);
+
 /*****************************************************************************************************************************************************/
 /******************************************************************** HTTPS Exports ******************************************************************/
 /*****************************************************************************************************************************************************/
